@@ -54,7 +54,7 @@ public class Main {
         // 최종 스위치 상태 출력
         for (int i = 0; i < switchCount; i++) {
             System.out.print(switches[i] + " ");
-            if ((i + 1) % 20 == 0) {  // 한 줄에 최대 20개의 스위치 상태를 출력
+            if (i % 20 == 19) {  // 한 줄에 최대 20개의 스위치 상태를 출력
                 System.out.println();
             }
         }
