@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -7,25 +6,22 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
         int N = sc.nextInt();
-
-        PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) ->  {
-//                return o1-o2;
-            if (Math.abs(o1) == Math.abs(o2)) {
-                return o1 - o2; // 더 작은 값
-            } else {
-                return Math.abs(o1) - Math.abs(o2);
-            }
-        });
+        sc.nextLine();
 
         for (int i = 0; i < N; i++) {
-            int x = sc.nextInt();
+            int x = Integer.parseInt(sc.nextLine());
             if (x == 0) {
-                int answer = pq.isEmpty() ? 0 : pq.poll();
-                System.out.println(answer);
+                if (minHeap.isEmpty()) {
+                    System.out.println(0);
+                } else {
+                    System.out.println(minHeap.poll());
+                }
             } else {
-                pq.offer(x);
+                minHeap.add(x);
             }
         }
+        sc.close();
     }
 }
