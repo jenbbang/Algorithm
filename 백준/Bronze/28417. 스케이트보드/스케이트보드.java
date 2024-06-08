@@ -12,12 +12,6 @@ public class Main {
         // 최고 점수를 저장할 변수
         int maxScore = 0;
 
-        // 공동 우승자를 확인하는 변수
-        boolean isTie = false;
-
-        // 최고 점수를 받은 선수의 인덱스
-        int winnerIndex = -1;
-
         // 각 선수의 점수를 계산
         for (int i = 0; i < N; i++) {
             int[] scores = new int[7];
@@ -39,10 +33,6 @@ public class Main {
             // 최고 점수와 비교하여 최고 점수를 갱신
             if (currentSum > maxScore) {
                 maxScore = currentSum;
-                winnerIndex = i;
-                isTie = false;
-            } else if (currentSum == maxScore) {
-                isTie = true;
             }
         }
 
