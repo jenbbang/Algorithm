@@ -1,31 +1,41 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int N = Integer.parseInt(br.readLine());
-
-        HashSet<String> set = new HashSet<>();
-        for (int i = 0; i < N; i++) {
-            set.add(br.readLine());
+        
+        int n = Integer.parseInt(br.readLine());
+        Set<Pair> set = new TreeSet<>();
+        
+        for (int i = 0; i < n; i++) {
+            String s = br.readLine();
+            set.add(new Pair(s.length(), s));
         }
 
-        ArrayList<String> list = new ArrayList<>(set);
-        Collections.sort(list, (a, b) -> {
-            if (a.length() == b.length()) {
-                return a.compareTo(b);
-            } else {
-                return a.length() - b.length();
-            }
-        });
+        for (Pair pair : set) {
+            System.out.println(pair.str);
+        }
+    }
+}
 
-        for (String word : list) {
-            System.out.println(word);
+class Pair implements Comparable<Pair> {
+    int len;
+    String str;
+
+    Pair(int len, String str) {
+        this.len = len;
+        this.str = str;
+    }
+
+    @Override
+    public int compareTo(Pair o) {
+        if (this.len != o.len) {
+            return this.len - o.len;
+        } else {
+            return this.str.compareTo(o.str);
         }
     }
 }
