@@ -1,55 +1,41 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
 
-        int N = sc.nextInt();
-        int M = sc.nextInt();
-
-        boolean[][] martrix = new boolean[N + 100][M + 100];
-
-        for (int i = 0; i < N; i++) {
-            String str = sc.next();
-            for (int j = 0; j < M; j++) {
-                martrix[i][j] = (str.charAt(j) == 'W');
-            }
+        String[][] board = new String[M][N];
+        for (int i = 0; i < M; i++) {
+            board[i] = br.readLine().split("");
         }
 
-        int chessRow = N - 7;
-        int chessColumn = M - 7;
+        int minCount = Integer.MAX_VALUE;
 
-        int answer = 64;
-        for (int i = 0; i < chessRow; i++) {
-            for (int j = 0; j < chessColumn; j++) {
-                //최솟갑 구하기
-                answer = Math.min(answer, solve(martrix, i, j));
-            }
-
-        }
-        System.out.println(answer);
-    }
-
-    public static int solve(boolean[][] martix, int x, int y) {
-        int chessX = x + 8;  // 새로운 좌표
-        int chessY = y + 8;
-        int count = 0;
-
-        boolean curColor = martix[x][y]; //체스판 첫번재 값
-
-        for (int i = x; i < chessX; i++) {
-            for (int j = y; j < chessY; j++) {
-                if (martix[i][j] != curColor) {
-                    count++;
+        for (int i = 0; i <= M - 8; i++) {
+            for (int j = 0; j <= N - 8; j++) {
+                int count1 = 0; // 왼쪽 위가 W일때
+                int count2 = 0; // 왼쪽 위가 B일때
+                for (int x = 0; x < 8; x++) {
+                    for (int y = 0; y < 8; y++) {
+                        if ((x + y) % 2 == 0) {
+                            if (!board[i + x][j + y].equals("W")) count1++;
+                            if (!board[i + x][j + y].equals("B")) count2++;
+                        } else {
+                            if (!board[i + x][j + y].equals("B")) count1++;
+                            if (!board[i + x][j + y].equals("W")) count2++;
+                        }
+                    }
                 }
-                curColor = (!curColor);
+                int Min = Math.min(count1, count2);
+                minCount = Math.min(minCount, Min);
             }
-            curColor = (!curColor);
         }
-        return Math.min(count, 64 - count);
+
+        System.out.println(minCount);
     }
 }
