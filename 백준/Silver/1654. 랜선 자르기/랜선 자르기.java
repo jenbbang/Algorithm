@@ -1,29 +1,30 @@
+import java.io.BufferedReader;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new java.io.InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        Scanner sc = new Scanner(System.in);
+        int k = Integer.parseInt(st.nextToken()); //이미 가지고 있는 랜선의 개수
+        int n = Integer.parseInt(st.nextToken()); //필요한 랜선의 개수
+        
+        long [] arr = new long[k];
 
-        int K = sc.nextInt();
-        int N = sc.nextInt();
-        long[] arr = new long[K];
-
-        for (int i = 0; i < K; i++) {
-            arr[i] = sc.nextInt();
-//            max = Math.max(max, arr[i]);
-
+        for (int i = 0; i < k; i++) {
+            arr[i] = Long.parseLong(br.readLine());
         }
+        Arrays.sort(arr);
+
         long max = Arrays.stream(arr).max().orElseThrow();
         long start = 1;
-        long end = max;
+        long end = max ;
 
         while (start <= end) {
             long mid = (start + end) / 2;
             long sum = Arrays.stream(arr).map(x -> x / mid).sum();
-
-            if (sum >= N) {
+            if (sum >= n) {
                 start = mid + 1;
             } else {
                 end = mid - 1;
