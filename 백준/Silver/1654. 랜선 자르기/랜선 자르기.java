@@ -15,7 +15,6 @@ public class Main {
         for (int i = 0; i < k; i++) {
             arr[i] = Long.parseLong(br.readLine());
         }
-        Arrays.sort(arr);
 
         long max = Arrays.stream(arr).max().orElseThrow();
         long start = 1;
