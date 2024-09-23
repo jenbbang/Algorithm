@@ -1,25 +1,31 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt(); // 나무의 수
-        int M = sc.nextInt(); // 나무의 길이
-       int [] trees = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken()); // 나무의 수
+        int M = Integer.parseInt(st.nextToken()); // 필요한 나무의 길이
 
+        int[] trees = new int[N];
+        int max = 0;
 
-       int max = 0;
+        st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            trees[i] = sc.nextInt();
-            if (trees[i]> max){
+            trees[i] = Integer.parseInt(st.nextToken());
+            if (trees[i] > max) {
                 max = trees[i];
             }
         }
-        // 이분 탐색을 위한 변수 설정
+
         int low = 0;
         int high = max;
 
+        // 이분 탐색 시작
         while (low <= high) {
             int mid = (low + high) / 2;
             long wood = 0;
@@ -38,7 +44,6 @@ public class Main {
                 high = mid - 1;
             }
         }
-
         System.out.println(high);
     }
 }
