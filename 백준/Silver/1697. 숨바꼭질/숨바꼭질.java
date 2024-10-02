@@ -1,16 +1,20 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(); // 수빈이 현재 위치
-        int k = sc.nextInt(); // 동생 현재 위치
-        sc.close();
-
-        if (n >= k) {
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
+        if (n >= m) {
             // 수빈이가 동생의 위치보다 앞에 있거나 같다면, 뒤로 한 칸씩 가는 것이 최단 시간
-            System.out.println(n - k);
+            System.out.println(n - m);
             return;
         }
 
@@ -39,12 +43,13 @@ public class Main {
                     time[next] = time[current] + 1;
 
                     // 동생의 위치에 도달하면 시간을 출력하고 종료
-                    if (next == k) {
+                    if (next == m) {
                         System.out.println(time[next]);
                         return;
                     }
                 }
             }
         }
+
     }
 }
