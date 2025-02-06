@@ -1,17 +1,20 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         
         // 입력 받기
-        int N = scanner.nextInt(); // 집의 개수
-        int C = scanner.nextInt(); // 공유기의 개수
+        String[] firstLine = reader.readLine().split(" ");
+        int N = Integer.parseInt(firstLine[0]); // 집의 개수
+        int C = Integer.parseInt(firstLine[1]); // 공유기의 개수
         int[] houses = new int[N];
         
         for (int i = 0; i < N; i++) {
-            houses[i] = scanner.nextInt(); // 각 집의 좌표
+            houses[i] = Integer.parseInt(reader.readLine()); // 각 집의 좌표
         }
         
         // 집의 좌표를 정렬
